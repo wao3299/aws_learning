@@ -59,7 +59,7 @@ const deck = {
 
 - `bun run validate` が 20 問すべて合格すること
 - `bun run build` が成功すること
-- `bun run dev` で `/aws_learning/owasp` が動作し、ナビ・ハブからの導線があること
+- `bun run dev` で `/study-deck/owasp/` が動作し、ナビ・ハブからの導線があること
 
 ## 検討して却下した案
 
