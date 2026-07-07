@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+const base = import.meta.env.BASE_URL;
+const decks = [
+  { href: `${base}saa/`, code: "SAA", name: "Solutions Architect Associate", note: "SAA-C03 · 297問" },
+  { href: `${base}dva/`, code: "DVA", name: "Developer Associate", note: "DVA-C02 · 20問" },
+  { href: `${base}dea/`, code: "DEA", name: "Data Engineer Associate", note: "DEA-C01 · 20問" },
+];
+---
+<Base title="腕試しクイズ">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Quiz Decks</p>
+      <h1>腕試しクイズ</h1>
+      <p class="sub">挑戦するデックを選ぶ。</p>
+    </header>
+    <section class="card">
+      <div class="home-modes">
+        {decks.map((d) => (
+          <a class="mode-btn" href={d.href}>
+            <span class="mb-ico">{d.code}</span>
+            <span class="mb-tt"><span class="mb-name">{d.name}</span><span class="mb-desc">{d.note}</span></span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>
