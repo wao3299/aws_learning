@@ -9,14 +9,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## コマンド
 
 ```bash
-npm install
-npm run dev       # http://localhost:4321/aws_learning/ （base パス付きに注意）
-npm run build     # dist/ に静的出力
-npm run preview   # ビルド結果の確認
-npm run validate  # 問題データの構造チェック（CI の validate.yml でも実行）
+bun install
+bun run dev       # http://localhost:4321/aws_learning/ （base パス付きに注意）
+bun run build     # dist/ に静的出力
+bun run preview   # ビルド結果の確認
+bun run validate  # 問題データの構造チェック（CI の validate.yml でも実行）
 ```
 
-テストフレームワークはない。検証は `npm run validate`（`scripts/validate.js`）のみ。
+テストフレームワークはない。検証は `bun run validate`（`scripts/validate.js` を Bun ランタイムで実行）のみ。
 
 ## アーキテクチャ
 
