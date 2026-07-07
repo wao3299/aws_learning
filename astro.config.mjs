@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://wao3299.github.io',
-  base: '/aws_learning',
+  base: '/study-deck',
   trailingSlash: 'always',
   build: { format: 'directory' },
 });

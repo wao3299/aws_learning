@@ -1,6 +1,6 @@
 ---
 const { deck } = Astro.props;
-const base = import.meta.env.BASE_URL; // 例: /aws_learning/
+const base = import.meta.env.BASE_URL; // 例: /study-deck/
 const cfg = { code: deck.code, data: deck.data, practiceN: deck.practiceN, exam: deck.exam };
 const passPct = Math.round((deck.exam?.passPct ?? 0.72) * 100);
 ---
