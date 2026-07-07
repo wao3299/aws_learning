@@ -1,7 +1,7 @@
 /* a: number=単一選択 / array=複数選択（完全一致で正解）
    oe: 各選択肢（o と同順）の解説。正解選択肢=なぜ正しいか / 不正解=なぜ違うか
 
-   資格ごとの設定は HTML 側で window.QUIZ_CONFIG に定義する:
+   deck ごとの設定は HTML 側で window.QUIZ_CONFIG に定義する:
    { code, data, practiceN, exam:{enabled,n,minutes,passPct} } */
 const CFG = window.QUIZ_CONFIG || {};
 const EXAM = CFG.exam || { enabled: false };
@@ -24,9 +24,9 @@ let timerId = null, examEndsAt = 0;
 const el = id => document.getElementById(id);
 const KEYS = ["A","B","C","D","E"];
 
-/* SAA は既存ユーザーの統計を維持するため旧キー名を使う。他資格は資格コード別 */
-const LS_KEY = CFG.code === "SAA" ? "saaQuizStats_v1" : "quizStats_" + (CFG.code || "X") + "_v1";
-const LS_HIST = CFG.code === "SAA" ? "saaQuizHistory_v1" : "quizHistory_" + (CFG.code || "X") + "_v1";
+/* localStorage キーは全 deck で統一（quizStats_<code>_v1 / quizHistory_<code>_v1） */
+const LS_KEY = "quizStats_" + (CFG.code || "X") + "_v1";
+const LS_HIST = "quizHistory_" + (CFG.code || "X") + "_v1";
 function loadLS(k, def){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e){ return def; } }
 function saveLS(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
 let STATS = loadLS(LS_KEY, {});
