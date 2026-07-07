@@ -1,7 +1,7 @@
 /* a: number=単一選択 / array=複数選択（完全一致で正解）
    oe: 各選択肢（o と同順）の解説。正解選択肢=なぜ正しいか / 不正解=なぜ違うか
 
-   資格ごとの設定は HTML 側で window.QUIZ_CONFIG に定義する:
+   deck ごとの設定は HTML 側で window.QUIZ_CONFIG に定義する:
    { code, data, practiceN, exam:{enabled,n,minutes,passPct} } */
 const CFG = window.QUIZ_CONFIG || {};
 const EXAM = CFG.exam || { enabled: false };
