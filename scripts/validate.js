@@ -12,6 +12,15 @@ const FILES = [
   "public/questions-owasp.json",
 ];
 
+// quiz.js が q/o/oe/e を innerHTML で描画するため、許可した修飾タグ（属性なし）以外の
+// タグ状文字列はエラーにする。生の < > を表示したい場合は &lt; &gt; と書く
+const ALLOWED_TAG = /^<\/?(strong|code|em|b|i|u|mark|small|kbd|var|sub|sup)>$|^<br\s*\/?>$/;
+const TAG_LIKE = /<\/?[a-zA-Z][^>]*>?/g;
+
+function badHtml(str) {
+  return (str.match(TAG_LIKE) ?? []).filter(tag => !ALLOWED_TAG.test(tag));
+}
+
 let grandTotal = 0;
 let hadError = false;
 
@@ -43,6 +52,13 @@ for (const file of FILES) {
     if (Array.isArray(x.a)) {
       if (new Set(x.a).size !== x.a.length) errors.push(`${at}: 正解インデックスが重複`);
       if (x.a.length < 2) errors.push(`${at}: 複数選択なのに正解が ${x.a.length} 件`);
+    }
+    for (const [field, value] of Object.entries(x)) {
+      const strs = Array.isArray(value) ? value : [value];
+      strs.forEach(s => {
+        if (typeof s !== "string") return;
+        badHtml(s).forEach(tag => errors.push(`${at}: フィールド ${field} に許可されていない HTML "${tag}"`));
+      });
     }
     const key = x.d + "|" + x.t;
     if (seenKeys.has(key)) errors.push(`${at}: 学習統計キー "${key}" が他の問題と重複`);
