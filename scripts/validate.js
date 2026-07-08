@@ -5,7 +5,12 @@ import { dirname } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // 検証対象。deck を追加したらここに足す
-const FILES = ["public/questions-saa.json", "public/questions-dva.json", "public/questions-dea.json"];
+const FILES = [
+  "public/questions-saa.json",
+  "public/questions-dva.json",
+  "public/questions-dea.json",
+  "public/questions-owasp.json",
+];
 
 let grandTotal = 0;
 let hadError = false;
