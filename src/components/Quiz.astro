@@ -14,6 +14,7 @@ const passPct = Math.round((deck.exam?.passPct ?? 0.72) * 100);
       <a href={`${base}saa/`} class={deck.active === "SAA" ? "active" : undefined}>SAA</a>
       <a href={`${base}dva/`} class={deck.active === "DVA" ? "active" : undefined}>DVA</a>
       <a href={`${base}dea/`} class={deck.active === "DEA" ? "active" : undefined}>DEA</a>
+      <a href={`${base}owasp/`} class={deck.active === "OWASP" ? "active" : undefined}>OWASP</a>
     </nav>
     <span class="mode-tag" id="modetag">弱点復習モード</span>
     <div class="progress" id="progress">
