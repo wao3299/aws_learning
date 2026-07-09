@@ -6,6 +6,15 @@ const passPct = Math.round((deck.exam?.passPct ?? 0.72) * 100);
 ---
 <div class="wrap">
   <header>
+    <div class="auth-box">
+      <span class="auth-warn" id="syncwarn" hidden></span>
+      <button class="btn ghost auth-btn" id="loginbtn" hidden>Google でログイン</button>
+      <span class="auth-user" id="authuser" hidden>
+        <img class="auth-avatar" id="authavatar" alt="" referrerpolicy="no-referrer">
+        <span id="authname"></span>
+        <button class="btn ghost auth-btn" id="logoutbtn">ログアウト</button>
+      </span>
+    </div>
     <p class="eyebrow">{deck.eyebrow}</p>
     <h1>{deck.title}</h1>
     <p class="sub">{deck.sub}</p>
