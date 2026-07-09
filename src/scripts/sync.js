@@ -25,6 +25,7 @@ export function initSync(opts){
   el("loginbtn").onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).catch(()=>{});
   el("logoutbtn").onclick = () => signOut(auth);
   onAuthStateChanged(auth, u => {
+    if (timerId){ clearTimeout(timerId); timerId = null; }
     user = u;
     denied = false;
     docRef = u ? doc(db, "users", u.uid, "decks", ctx.code) : null;
