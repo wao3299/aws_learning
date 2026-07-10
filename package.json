@@ -7,9 +7,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "validate": "bun scripts/validate.js"
+    "validate": "bun scripts/validate.js",
+    "test": "bun test"
   },
   "dependencies": {
-    "astro": "^7.0.6"
+    "astro": "^7.0.6",
+    "firebase": "^12.15.0"
   }
 }

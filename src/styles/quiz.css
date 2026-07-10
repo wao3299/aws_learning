@@ -238,3 +238,10 @@
   }
   .deck-nav a:hover { color: var(--ink); border-color: var(--accent); background: var(--surface-2); }
   .deck-nav a.active { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+
+  /* 認証 UI（ヘッダー右上） */
+  .auth-box { display: flex; justify-content: flex-end; align-items: center; gap: 10px; min-height: 30px; margin-bottom: 4px; }
+  .auth-btn { font-size: 12px; padding: 4px 12px; }
+  .auth-user { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
+  .auth-avatar { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); }
+  .auth-warn { font-size: 12px; color: var(--bad); }
