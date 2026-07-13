@@ -66,7 +66,10 @@ const passPct = Math.round((deck.exam?.passPct ?? 0.72) * 100);
     </div>
     <div class="nav" style="justify-content:space-between; align-items:center;">
       <span class="keyhint">A–E / 1–5 で選択・Enter で決定</span>
-      <button class="btn" id="action" disabled>回答する</button>
+      <span style="display:flex; gap:12px;">
+        <button class="btn ghost" id="reveal">答えを見る</button>
+        <button class="btn" id="action" disabled>回答する</button>
+      </span>
     </div>
   </section>
 
