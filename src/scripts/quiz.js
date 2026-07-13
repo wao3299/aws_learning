@@ -65,6 +65,40 @@ function pickWeak(n){
   return shuffle(scored.slice(0, poolSize).map(x=>x.q)).slice(0, n);
 }
 
+/* 分野別モード: ALL の d から分野を全列挙してモーダルに描画する（未学習の分野も出す） */
+function openDomainDialog(){
+  const dlg = el("domaindlg");
+  const list = el("domainlist");
+  const domains = [];
+  const count = {};
+  ALL.forEach(q=>{
+    if (!(q.d in count)){ domains.push(q.d); count[q.d] = 0; }
+    count[q.d]++;
+  });
+  const dom = {};
+  Object.keys(STATS).forEach(k=>{ const s=STATS[k]; const d=k.split("|")[0];
+    dom[d] = dom[d] || {seen:0, correct:0};
+    dom[d].seen += s.seen; dom[d].correct += s.correct; });
+  list.innerHTML = "";
+  domains.forEach(d=>{
+    const b = document.createElement("button");
+    b.className = "domain-item";
+    const s = dom[d];
+    const meta = (s && s.seen)
+      ? count[d] + "問 · 通算正答率 " + Math.round(s.correct/s.seen*100) + "%"
+      : count[d] + "問";
+    b.innerHTML = '<span class="di-name">'+d+'</span><span class="di-meta">'+meta+'</span>';
+    b.onclick = () => { dlg.close(); startDomainSession(d); };
+    list.appendChild(b);
+  });
+  dlg.showModal();
+}
+
+function startDomainSession(d){
+  const pool = ALL.filter(q => q.d === d);
+  startSession(shuffle(pool).slice(0, PRACTICE_N), "分野別: " + d);
+}
+
 function renderLifetime(){
   const lt = el("lifetime");
   const keys = Object.keys(STATS);
@@ -426,6 +460,12 @@ el("retry").onclick = () => startSession(shuffle(ALL).slice(0, PRACTICE_N), "");
 if (el("startTest")) el("startTest").onclick = () => startSession(shuffle(ALL).slice(0, PRACTICE_N), "");
 if (el("startExam")) el("startExam").onclick = () => startExam();
 if (el("startWeak")) el("startWeak").onclick = () => startSession(pickWeak(PRACTICE_N), "苦手中心モード");
+if (el("startDomain")) el("startDomain").onclick = () => openDomainDialog();
+/* ✕ ボタンと背景クリックで閉じる（ESC は showModal() の標準挙動） */
+if (el("domaindlg")){
+  el("domainclose").onclick = () => el("domaindlg").close();
+  el("domaindlg").addEventListener("click", (e)=>{ if (e.target === el("domaindlg")) el("domaindlg").close(); });
+}
 function resetAll(){
   if (confirm("これまでの学習データ（成績・苦手記録）を消去します。よろしいですか？")){
     STATS = {}; saveLS(LS_KEY, STATS); saveLS(LS_HIST, []);
