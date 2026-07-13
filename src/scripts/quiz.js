@@ -281,6 +281,7 @@ function render(){
   });
 
   el("explain").hidden = true;
+  el("reveal").hidden = false;
   const action = el("action");
   action.textContent = "回答する";
   action.disabled = true;
@@ -339,6 +340,7 @@ function grade(){
   el("verdict").textContent = isRight ? "✓ 正解" : "✕ 不正解 — 正解は " + correctLabels;
   el("expltext").innerHTML = item.e;
 
+  el("reveal").hidden = true;
   const action = el("action");
   action.disabled = false;
   action.textContent = (current === session.length-1) ? "結果を見る →" : "次へ →";
@@ -349,6 +351,9 @@ el("action").onclick = () => {
   if (current === session.length-1){ showResult(); }
   else { current++; render(); }
 };
+
+/* 選択なしで採点する = 必ず不正解となり、解説表示・統計記録まで grade() で完結する */
+el("reveal").onclick = () => { if (!answered) grade(); };
 
 function showResult(){
   stopTimer();
