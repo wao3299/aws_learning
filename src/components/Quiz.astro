@@ -43,6 +43,10 @@ const passPct = Math.round((deck.exam?.passPct ?? 0.72) * 100);
         <span class="mb-ico">◎</span>
         <span class="mb-tt"><span class="mb-name">苦手中心（{deck.practiceN}問）</span><span class="mb-desc">間違えた・未習得の問題を優先して{deck.practiceN}問。</span></span>
       </button>
+      <button class="mode-btn" id="startDomain">
+        <span class="mb-ico">▤</span>
+        <span class="mb-tt"><span class="mb-name">分野を選んで練習</span><span class="mb-desc">1つの分野に絞って最大{deck.practiceN}問。集中的に固める。</span></span>
+      </button>
     </div>
     <div class="statsbox" id="homestats"></div>
     <div class="home-foot"><button class="btn ghost" id="homereset" hidden>学習データをリセット</button></div>
@@ -88,6 +92,16 @@ const passPct = Math.round((deck.exam?.passPct ?? 0.72) * 100);
       <button class="btn ghost" id="resetstats" hidden>学習データをリセット</button>
     </div>
   </section>
+
+  <dialog id="domaindlg" class="domain-dlg">
+    <div class="dlg-inner">
+      <div class="dlg-head">
+        <h2 class="dlg-title">分野を選んで練習</h2>
+        <button class="dlg-close" id="domainclose" aria-label="閉じる">✕</button>
+      </div>
+      <div class="domain-list" id="domainlist"></div>
+    </div>
+  </dialog>
 </div>
 
 <script is:inline set:html={`window.QUIZ_CONFIG = ${JSON.stringify(cfg)};`}></script>
