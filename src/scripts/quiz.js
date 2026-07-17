@@ -216,6 +216,7 @@ function shuffle(arr){
 const isMulti = q => Array.isArray(q.a);
 let cur = null;
 function shuffledQuestion(q){
+  if (q.f) return q; // ○×など選択肢の順序に意味がある問題はシャッフルしない
   const order = shuffle(q.o.map((_,i)=>i));
   const o = order.map(i=>q.o[i]);
   const oe = q.oe ? order.map(i=>q.oe[i]) : q.oe;
